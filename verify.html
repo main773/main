@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>I'm not a robot — Mini Puzzle Captcha</title>
+  <style>
+    :root{--accent:#2563eb;--bg:#f3f4f6}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial}
+    body{display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#eef2ff,#fff);padding:30px}
+    .card{width:380px;background:white;border-radius:12px;box-shadow:0 8px 24px rgba(16,24,40,0.08);padding:18px}
+    h1{font-size:16px;margin:0 0 12px;color:#111827}
+    .row{display:flex;gap:12px;align-items:center}
+    .fake-checkbox{width:28px;height:28px;border-radius:6px;border:2px solid #e5e7eb;display:flex;align-items:center;justify-content:center;cursor:pointer}
+    .fake-checkbox.checked{border-color:var(--accent);background:linear-gradient(180deg,rgba(37,99,235,0.12),rgba(37,99,235,0.06))}
+    .label{font-size:14px;color:#111827}
+    .hint{font-size:12px;color:#6b7280;margin-top:8px}
+    .puzzle-wrap{margin-top:14px;display:none}
+    .puzzle{position:relative;width:100%;height:140px;background:linear-gradient(135deg,#f8fafc,#eef2ff);border-radius:8px;overflow:hidden;border:1px solid #e6eefb}
+    .puzzle .bg{position:absolute;inset:0;background-image:radial-gradient(circle at 20% 30%, #fff6f3, transparent 10%), linear-gradient(120deg,#dbeafe,#f0f9ff)}
+    .slot{position:absolute;top:34px;width:66px;height:66px;border-radius:6px;box-shadow:inset 0 2px 6px rgba(0,0,0,0.06);border:2px dashed rgba(0,0,0,0.08);}
+    .piece{position:absolute;top:34px;width:66px;height:66px;border-radius:6px;box-shadow:0 6px 20px rgba(2,6,23,0.08);background-image:linear-gradient(180deg,#fff,#fff0);cursor:grab;display:flex;align-items:center;justify-content:center;font-weight:600}
+    .piece:active{cursor:grabbing}
+    .slider-row{margin-top:12px;display:flex;align-items:center;gap:8px}
+    .slider{flex:1;height:8px;background:#e6eefb;border-radius:999px;position:relative}
+    .knob{position:absolute;top:50%;transform:translate(-50%,-50%);width:28px;height:28px;border-radius:50%;background:white;border:2px solid #c7d3f8;box-shadow:0 6px 16px rgba(2,6,23,0.08);cursor:pointer}
+    .status{min-width:92px;text-align:right;font-size:13px}
+    .success{color:rgb(16,185,129)}
+    .fail{color:#ef4444}
+    .small{font-size:12px;color:#6b7280;margin-top:10px}
+    button.retry,button.proceed{margin-top:10px;background:#fff;border:1px solid #e5e7eb;padding:8px 10px;border-radius:8px;cursor:pointer}
+    button.proceed{display:none;color:white;background:var(--accent);border:none}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="row">
+      <div id="checkbox" class="fake-checkbox" title="Click to start puzzle">
+        <svg id="checkmark" width="18" height="18" viewBox="0 0 24 24" fill="none" style="display:none"><path d="M5 13l4 4L19 7" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div>
+        <div class="label">I'm not a robot</div>
+        <div class="hint">Click the box and complete the mini-puzzle</div>
+      </div>
+    </div>
+    <div id="puzzleWrap" class="puzzle-wrap">
+      <div class="puzzle" id="puzzle">
+        <div class="bg"></div>
+        <div id="slot" class="slot"></div>
+        <div id="piece" class="piece">🔲</div>
+      </div>
+      <div class="slider-row">
+        <div id="sliderTrack" class="slider">
+          <div id="knob" class="knob"></div>
+        </div>
+        <div id="status" class="status">0%</div>
+      </div>
+      <div class="small">Drag the round knob left/right to slide the piece into the gap. Release when it lines up.</div>
+      <button id="retry" class="retry" style="display:none">Try again</button>
+      <button id="proceed" class="proceed" onclick="window.location.href='main.html'">Continue</button>
+    </div>
+  </div>
+  <script>
+    const checkbox=document.getElementById('checkbox');
+    const puzzleWrap=document.getElementById('puzzleWrap');
+    const slot=document.getElementById('slot');
+    const piece=document.getElementById('piece');
+    const sliderTrack=document.getElementById('sliderTrack');
+    const knob=document.getElementById('knob');
+    const status=document.getElementById('status');
+    const retryBtn=document.getElementById('retry');
+    const proceedBtn=document.getElementById('proceed');
+    const checkmark=document.getElementById('checkmark');
+    let solved=false;
+    function rand(min,max){return Math.floor(Math.random()*(max-min+1))+min}
+    function setupPuzzle(){
+      solved=false;
+      puzzleWrap.style.display='block';
+      retryBtn.style.display='none';
+      proceedBtn.style.display='none';
+      checkbox.classList.remove('checked');
+      checkmark.style.display='none';
+      status.textContent='0%';
+      const puzzleRect=document.getElementById('puzzle').getBoundingClientRect();
+      const maxX=puzzleRect.width-66-12;
+      const slotX=rand(12,Math.max(12,Math.floor(maxX)));
+      slot.style.left=slotX+'px';
+      const pieceX=rand(12,Math.max(12,Math.floor(maxX)));
+      piece.style.left=pieceX+'px';
+      knob.style.left='14px';
+      piece.dataset.target=slotX;
+      piece.dataset.start=pieceX;
+    }
+    checkbox.addEventListener('click',()=>{if(solved)return;setupPuzzle()});
+    let dragging=false;let trackRect,knobWidth;
+    function startDrag(e){if(solved)return;dragging=true;trackRect=sliderTrack.getBoundingClientRect();knobWidth=knob.getBoundingClientRect().width;document.addEventListener('mousemove',onDrag);document.addEventListener('touchmove',onDrag,{passive:false});document.addEventListener('mouseup',endDrag);document.addEventListener('touchend',endDrag)}
+    function onDrag(e){if(!dragging)return;e.preventDefault();const clientX=(e.touches?e.touches[0].clientX:e.clientX);let x=clientX-trackRect.left;x=Math.max(knobWidth/2,Math.min(trackRect.width-knobWidth/2,x));knob.style.left=x+'px';const ratio=(x-knobWidth/2)/(trackRect.width-knobWidth);const puzzleRect=document.getElementById('puzzle').getBoundingClientRect();const start=parseInt(piece.dataset.start);const targetX=parseInt(piece.dataset.target);const maxMove=puzzleRect.width-66-12;const newX=Math.round(12+ratio*(maxMove-12));piece.style.left=newX+'px';const pct=Math.round(ratio*100);status.textContent=pct+'%'}
+    function endDrag(){if(!dragging)return;dragging=false;document.removeEventListener('mousemove',onDrag);document.removeEventListener('touchmove',onDrag);document.removeEventListener('mouseup',endDrag);document.removeEventListener('touchend',endDrag);const left=parseInt(piece.style.left);const target=parseInt(piece.dataset.target);const tol=8;if(Math.abs(left-target)<=tol){succeed()}else{fail()}}
+    knob.addEventListener('mousedown',startDrag);knob.addEventListener('touchstart',startDrag,{passive:false});
+    function succeed(){solved=true;checkbox.classList.add('checked');checkmark.style.display='block';status.innerHTML='<span class="success">Verified</span>';retryBtn.style.display='none';piece.style.left=piece.dataset.target+'px';piece.animate([{transform:'scale(1)'},{transform:'scale(1.02)'},{transform:'scale(1)'}],{duration:550});setTimeout(()=>{window.location.href='main.html'},800);proceedBtn.style.display='inline-block'}
+    function fail(){status.innerHTML='<span class="fail">Try again</span>';retryBtn.style.display='inline-block';piece.animate([{transform:'translateX(0px)'},{transform:'translateX(-8px)'},{transform:'translateX(6px)'},{transform:'translateX(-4px)'},{transform:'translateX(0px)'}],{duration:420})}
+    retryBtn.addEventListener('click',setupPuzzle);
+    window.addEventListener('load',()=>{setupPuzzle();puzzleWrap.style.display='none'});
+  </script>
+</body>
+</html>
