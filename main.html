@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Main.html</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style>
+        a {
+            text-decoration: none;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            padding-top: 50px;
+            overflow-x: hidden;
+            transition: background-color 0.5s ease;
+        }
+        h1 {
+            font-size: 3rem;
+            margin: 0;
+            color: #2c3e50;
+            text-align: center;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        p {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            font-weight: 400;
+            text-align: center;
+            margin-top: 5px;
+        }
+        .game-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin-top: 30px;
+            animation: fadeIn 1.5s ease-in-out;
+            width: 100%;
+        }
+        .game-item {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .game-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+        }
+        .game-item img {
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+        .game-item img:hover {
+            transform: scale(1.05);
+        }
+        .game-item p {
+            margin-top: 15px;
+            font-size: 1.2rem;
+            color: black;
+            font-weight: bold;
+            text-transform: capitalize;
+            transition: color 0.3s ease;
+        }
+        .game-item:hover p {
+            color: #3498db;
+        }
+        footer {
+            margin-top: 50px;
+            font-size: 1rem;
+            color: #7f8c8d;
+            text-align: center;
+            animation: fadeIn 1.5s ease-in-out 2s;
+        }
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @media (max-width: 768px) {
+            .game-container {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+
+        #blockOverlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: #111;
+            color: white;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            z-index: 9999;
+            font-family: 'Poppins', sans-serif;
+        }
+        #blockOverlay.show {
+            display: flex;
+        }
+        #blockOverlay h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        #blockOverlay p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        #blockOverlay button {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            background-color: #3498db;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #blockOverlay button:hover {
+            background-color: #2980b9;
+        }
+        #blockOverlay span#countdown {
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <h1>Main.html</h1>
+    <p>Created By: boxadmin1</p>
+
+<div class="game-container">
+    <a href="f/f0/dist/f0.html" class="game-item">
+        <img src="m/calculator.jpg" alt="Calculator" />
+        <p>Calculator</p>
+    </a>
+    <a href="f/f1/f1.html" class="game-item">
+        <img src="m/minecraft.png" alt="Minecraft" />
+        <p>Minecraft</p>
+    </a>
+    <a href="f/f2/f2.html" class="game-item">
+        <img src="m/tetris.jpg" alt="Tetris" />
+        <p>Tetris</p>
+    </a>
+    <a href="f/f3/dist/f3.html" class="game-item">
+        <img src="m/chess.png" alt="Game 3" />
+        <p>Chess</p>
+    </a>
+    <a href="f/f4/dist/f4.html" class="game-item">
+        <img src="m/stack.png" alt="Game 4" />
+        <p>Stack</p>
+    </a>
+    <a href="f/f5/dist/f5.html" class="game-item">
+        <img src="m/crossyroad.jpg" alt="Game 5" />
+        <p>Crossy Road</p>
+    </a>
+    <a href="f/f6/dist/f6.html" class="game-item">
+        <img src="m/wordle.png" alt="Game 6" />
+        <p>Wordle</p>
+    </a>
+    <a href="f/f7/dist/f7.html" class="game-item">
+        <img src="m/flappybird.jpg" alt="Game 7" />
+        <p>Flappy Bird</p>
+    </a>
+    <a href="f/f8/dist/f8.html" class="game-item">
+        <img src="m/balance.png" alt="Game 8" />
+        <p>Balance</p>
+    </a>
+    <a href="f/f9/f9.html" class="game-item">
+        <img src="m/cookieclicker.jpg" alt="Game 9" />
+        <p>Cookie Clicker</p>
+    </a>
+    <a href="f/f10/f10.html" class="game-item">
+        <img src="m/bowl.png" alt="Game 10" />
+        <p>Retro Bowl</p>
+    </a>
+</div>
+
+
+    <footer>
+        <p>Thank you for visiting!</p>
+    </footer>
+
+    <div id="blockOverlay">
+        <h2>Access Denied</h2>
+        <p>You must read and accept the Terms of Service and Privacy Policy before accessing this page.</p>
+        <button id="goBackBtn">Go to Welcome Page</button>
+        <p>Redirecting in <span id="countdown">5</span> seconds...</p>
+    </div>
+
+    <script>
+        const agreed = localStorage.getItem('agreedToTerms');
+        const blockOverlay = document.getElementById('blockOverlay');
+        const countdownEl = document.getElementById('countdown');
+        const goBackBtn = document.getElementById('goBackBtn');
+        if (agreed === 'true') {
+            blockOverlay.style.display = 'none';
+        } else {
+            document.body.style.overflow = 'hidden';
+            blockOverlay.classList.add('show');
+            let seconds = 5;
+            countdownEl.textContent = seconds;
+            const interval = setInterval(() => {
+                seconds--;
+                countdownEl.textContent = seconds;
+                if (seconds <= 0) {
+                    clearInterval(interval);
+                    window.location.href = 'index.html';
+                }
+            }, 1000);
+            goBackBtn.addEventListener('click', () => {
+                window.location.href = 'index.html';
+            });
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+

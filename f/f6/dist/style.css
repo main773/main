@@ -1,0 +1,498 @@
+body {
+  opacity: 1;
+  text-align: center;
+  font-family: system-ui;
+  background: #121213;
+  position: auto;
+  height: 100vh;
+  width: 100vw;
+  font-size: 16px;
+}
+
+#guesses-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  min-height: 150px;
+}
+
+.button1 {
+  height: 87%;
+  width: 70%;
+  background: #818384;
+  color: white;
+  border: 1px solid #818384;
+  border-radius: 4px;
+  margin: 3px;
+  font-weight: bold;
+  font-size: 14px;
+  justify-content: center;
+  align-items: center;
+  display: inline-flex;
+  box-shadow: 0 3px #666;
+}
+
+.button1:hover {
+  cursor: pointer;
+}
+
+.button2:hover {
+  cursor: pointer;
+}
+
+.ShareButton:hover {
+  cursor: pointer;
+}
+
+#keyboards {
+  height: 200px;
+  min-height: 200px;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 4px;
+}
+
+#container {
+  align-self: center;
+  height: 100vh;
+  max-width: 490px;
+  width: 99%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-top: 0px;
+  margin-right: auto;
+  margin-bottom: 0px;
+  margin-left: auto;
+}
+
+#guessView {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  max-height: 400px;
+  max-width: 330px;
+  height: 100%;
+  aspect-ratio: 10/12;
+  box-sizing: border-box;
+}
+
+#guesses {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#keyboard1 {
+  display: flex;
+  height: 33%;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+}
+
+#keyboard2 {
+  display: flex;
+  align-self: center;
+  height: 33%;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+}
+
+#keyboard3 {
+  display: flex;
+  align-self: center;
+  height: 33%;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+}
+
+.button2 {
+  height: 87%;
+  width: 119.49%;
+  background-color: #818384;
+  color: white;
+  border: 1px solid #818384;
+  border-radius: 3px;
+  margin: 3px;
+  font-weight: bold;
+  font-size: 10px;
+  justify-content: center;
+  vertical-align: middle;
+  align-items: center;
+  display: inline-flex;
+  font-size: calc(0.5em + 0.35vw);
+  box-shadow: 0 3px #666;
+}
+
+.backspace {
+  font-size: 20px;
+  box-shadow: 0 3px #666;
+}
+
+.box {
+  width: 100%;
+  min-width: 1.1rem;
+  min-height: 1.1rem;
+  box-sizing: border-box;
+  display: inline-flex;
+  justify-content: center;
+  vertical-align: middle;
+  align-items: center;
+  border: 2px solid #3a3a3c;
+  margin: 2.5px;
+  color: white;
+  box-sizing: border-box;
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 2rem;
+  line-height: 2rem;
+  font-weight: bold;
+  background-color: #121213;
+  opacity: 1;
+}
+
+.spacer {
+  width: 18%;
+  background: #121213;
+  border: 2px solid #121213;
+}
+
+@media (max-height: 600px) {
+  .box {
+    font-size: 2rem;
+    line-height: 1rem;
+  }
+
+  #container {
+    width: 90vw;
+  }
+}
+@media (max-height: 500px) {
+  .box {
+    font-size: 1rem;
+  }
+}
+#guess1 {
+  display: flex;
+  flex-direction: row;
+  height: 16.6666666667%;
+}
+
+#guess2 {
+  display: flex;
+  flex-direction: row;
+  height: 16.6666666667%;
+}
+
+#guess3 {
+  display: flex;
+  flex-direction: row;
+  height: 16.6666666667%;
+}
+
+#guess4 {
+  display: flex;
+  flex-direction: row;
+  height: 16.6666666667%;
+}
+
+#guess5 {
+  display: flex;
+  flex-direction: row;
+  height: 16.6666666667%;
+}
+
+#guess6 {
+  display: flex;
+  flex-direction: row;
+  height: 16.6666666667%;
+}
+
+.changing {
+  animation: spin 2s ease-out 0s forwards;
+}
+
+#popup {
+  display: flex;
+  flex-direction: column-reverse;
+  position: absolute;
+  align-self: center;
+  width: 50%;
+}
+
+.Pop {
+  z-index: 1;
+  width: 0%;
+  font-size: 0px;
+  font-weight: bold;
+  align-self: center;
+  background: white;
+  vertical-align: middle;
+  animation: fade-out 1.5s forwards;
+  display: block;
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+.PopMobile {
+  z-index: 1;
+  width: 0%;
+  font-size: 0px;
+  font-weight: bold;
+  align-self: center;
+  background: white;
+  vertical-align: middle;
+  animation: fade-out-mobile 1.5s forwards;
+  display: block;
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+.Win {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+  font-size: 0px;
+  font-weight: bold;
+  align-self: center;
+  background: #121213;
+  vertical-align: middle;
+  animation: fade-in 1.5s forwards;
+  color: white;
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+  border-radius: 8px;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  opacity: 1;
+  aspect-ratio: 1/1;
+}
+
+.ShareButton {
+  background: #538d4e;
+  border-radius: 4px;
+  border: 2px solid #538d4e;
+  color: white;
+  font-size: 15px;
+  opacity: 1;
+  animation: in 1.5s forwards;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 1;
+    width: 0;
+    font-size: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+  }
+  100% {
+    opacity: 1;
+    width: 34.5vw;
+    font-size: 18px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+}
+@keyframes in {
+  0% {
+    opacity: 0;
+    font-size: 0;
+  }
+  100% {
+    opacity: 1;
+    font-size: 18px;
+  }
+}
+.FooterRow {
+  width: 100%;
+}
+
+@keyframes clicked {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(3px);
+    background: #666;
+    border-color: #666;
+    box-shadow: 0 3px #333;
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+@keyframes fade-out-mobile {
+  0% {
+    opacity: 1;
+  }
+  10% {
+    opacity: 1;
+    width: 100%;
+    height: 100%;
+    font-size: 5vw;
+    padding-bottom: 18px;
+    padding-top: 18px;
+  }
+  50% {
+    opacity: 0.9;
+    width: 100%;
+    height: 100%;
+    font-size: 5vw;
+    padding-bottom: 18px;
+    padding-top: 18px;
+  }
+  100% {
+    opacity: 0;
+    width: 0%;
+    height: 0%;
+    font-size: 0px;
+  }
+}
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  10% {
+    opacity: 1;
+    width: 25%;
+    height: 100%;
+    font-size: 1.2vw;
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+  50% {
+    opacity: 0.9;
+    width: 25%;
+    height: 100%;
+    font-size: 1.2vw;
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+  100% {
+    opacity: 0;
+    width: 0%;
+    height: 0%;
+    font-size: 0px;
+  }
+}
+@keyframes animate {
+  from {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.2, 1.2);
+  }
+  to {
+    transform: scale(1, 1);
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+    background-color: #121213;
+  }
+  50% {
+    transform: rotate(3600deg);
+  }
+  100% {
+    background-color: #538d4e;
+  }
+}
+@-webkit-keyframes yspin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    background-color: #121213;
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+  }
+  100% {
+    background-color: #b59f3b;
+  }
+}
+@keyframes gspin {
+  0% {
+    rotation: 0deg;
+    background-color: #121213;
+  }
+  75% {
+    transform: rotate(3600deg);
+  }
+  100% {
+    background-color: #424949;
+  }
+}
+@-webkit-keyframes flip-horizontal-bottom {
+  0% {
+    background: #121213;
+    -webkit-transform: rotateX(0);
+  }
+  50% {
+    -webkit-transform: rotateX(-90deg);
+  }
+  100% {
+    background: #3a3a3c;
+  }
+}
+@keyframes shake {
+  0% {
+    transform: translateX(2px);
+  }
+  20% {
+    transform: translateX(-4px);
+  }
+  40% {
+    transform: translateX(4px);
+    background: #800000;
+    border: 2px solid #800000;
+    color: #800000;
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+  80% {
+    transform: translateX(4px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+@keyframes shakeLess {
+  0% {
+    transform: translateY(2px);
+  }
+  20% {
+    transform: translateY(-4px);
+  }
+  40% {
+    transform: translateY(4px);
+    background: #3c401d;
+    border: 2px solid #3c401d;
+    color: #3c401d;
+  }
+  60% {
+    transform: translateY(-4px);
+  }
+  80% {
+    transform: translateY(4px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}

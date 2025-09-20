@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Terms & Privacy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 60px 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      background: white;
+      max-width: 900px;
+      width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      padding: 40px 30px;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+    }
+    h2 {
+      font-size: 1.5rem;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      color: #2c3e50;
+    }
+    p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    ul {
+      margin-left: 20px;
+      margin-bottom: 20px;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    a {
+      color: #3498db;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Terms of Service & Privacy Policy</h1>
+
+    <h2>Terms of Service</h2>
+    <p>By using this website, you agree to the following terms:</p>
+    <ul>
+      <li>You must be at least 18 years old to use this website.</li>
+      <li>You may only use this site on devices you personally own or fully control.</li>
+      <li>Use on school, work, institutional, or public/shared devices is strictly prohibited.</li>
+      <li>Do not attempt to reverse-engineer, copy, or misuse any part of this service.</li>
+      <li>The owner is not liable for any misuse, damage, or legal consequences from unauthorized usage.</li>
+      <li>Your access may be restricted or terminated without notice if you violate these terms.</li>
+    </ul>
+
+    <h2>Privacy Policy</h2>
+    <p>This website is static and does not intentionally collect personal data. However:</p>
+    <ul>
+      <li>GitHub Pages may log IP addresses, browser type, and access times for analytics or security.</li>
+      <li>No cookies are directly used or stored by this site.</li>
+      <li>No forms, accounts, or databases are used to store personal information.</li>
+      <li>If you use third-party scripts, they may have their own tracking (check your browser settings).</li>
+    </ul>
+    <p>By using this site, you understand and accept that basic network information may be processed by the hosting provider (GitHub).</p>
+
+    <p>If you do not agree to these terms, please do not use the website.</p>
+  </div>
+</body>
+</html>
